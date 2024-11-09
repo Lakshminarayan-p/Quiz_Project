@@ -56,19 +56,40 @@ public class QuizActivity extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Question question = document.toObject(Question.class);
-                            questionList.add(question);
+                        if (task.getResult().isEmpty()) {
+                            // Add random questions if the collection is empty
+                            addRandomQuestions();
+                        } else {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Question question = document.toObject(Question.class);
+                                questionList.add(question);
+                            }
+                            Collections.shuffle(questionList);
+                            if (questionList.size() > 5) {
+                                questionList = questionList.subList(0, 5);
+                            }
+                            displayQuestion();
                         }
-                        Collections.shuffle(questionList);
-                        if (questionList.size() > 5) {
-                            questionList = questionList.subList(0, 5);
-                        }
-                        displayQuestion();
                     } else {
                         Log.e("FirestoreError", "Error getting documents: ", task.getException());
                     }
                 });
+    }
+
+    private void addRandomQuestions() {
+        List<Question> randomQuestions = new ArrayList<>();
+        randomQuestions.add(new Question("What is the capital of Italy?", "Rome", "Paris", "Berlin", "Madrid", "Rome"));
+        randomQuestions.add(new Question("What is the square root of 16?", "2", "4", "8", "16", "4"));
+        randomQuestions.add(new Question("Who painted the Mona Lisa?", "Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet", "Leonardo da Vinci"));
+        randomQuestions.add(new Question("What is the largest ocean on Earth?", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean", "Pacific Ocean"));
+        randomQuestions.add(new Question("What is the chemical symbol for gold?", "Au", "Ag", "Pb", "Fe", "Au"));
+
+        for (Question question : randomQuestions) {
+            db.collection("questions").add(question);
+        }
+
+        // Fetch questions again after adding
+        fetchQuestions();
     }
 
     private void displayQuestion() {

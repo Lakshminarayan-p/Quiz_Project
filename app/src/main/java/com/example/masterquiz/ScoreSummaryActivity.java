@@ -2,6 +2,7 @@ package com.example.masterquiz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class ScoreSummaryActivity extends AppCompatActivity {
         history.put("correctAnswers", correctAnswers);
         history.put("date", System.currentTimeMillis());
 
-        db.collection("history").add(history);
+        db.collection("history").add(history)
+                .addOnSuccessListener(documentReference -> Log.d("Firestore", "DocumentSnapshot added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w("Firestore", "Error adding document", e));
     }
 }
