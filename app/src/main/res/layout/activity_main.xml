@@ -2,18 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#90EE90"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_nature"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -21,18 +20,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="16dp"
             android:text="Nature"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:padding="16dp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_science"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toBottomOf="@id/card_nature"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -40,18 +39,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="16dp"
             android:text="Science"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:padding="16dp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_computer_science"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_margin="16dp"
         app:layout_constraintTop_toBottomOf="@id/card_science"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -59,10 +58,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="16dp"
             android:text="Computer Science"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:padding="16dp" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

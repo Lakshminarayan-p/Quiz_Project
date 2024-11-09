@@ -1,5 +1,6 @@
 package com.example.masterquiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -7,13 +8,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -85,7 +82,12 @@ public class QuizActivity extends AppCompatActivity {
 
             startTimer();
         } else {
-            // Quiz finished, show final score or navigate to another screen
+            Intent intent = new Intent(QuizActivity.this, ScoreSummaryActivity.class);
+            intent.putExtra("SCORE", score);
+            intent.putExtra("TOTAL_QUESTIONS", questionList.size());
+            intent.putExtra("CORRECT_ANSWERS", score); // assuming score is the number of correct answers
+            startActivity(intent);
+            finish();
         }
     }
 
