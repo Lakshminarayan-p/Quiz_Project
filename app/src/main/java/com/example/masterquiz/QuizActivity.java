@@ -149,8 +149,17 @@ public class QuizActivity extends AppCompatActivity {
 
     private void moveToNextQuestion() {
         currentQuestionIndex++;
-        nextButton.setVisibility(View.GONE);
-        displayQuestion();
+        if (currentQuestionIndex < questionList.size()) {
+            nextButton.setVisibility(View.GONE);
+            displayQuestion();
+        } else {
+            Intent intent = new Intent(QuizActivity.this, ScoreSummaryActivity.class);
+            intent.putExtra("SCORE", score);
+            intent.putExtra("TOTAL_QUESTIONS", questionList.size());
+            intent.putExtra("CORRECT_ANSWERS", score); // assuming score is the number of correct answers
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void enableOptions(boolean enable) {
